@@ -31,3 +31,11 @@
     opacity: 0.9;
     transition: all 0.2s linear;
 }
+
+/* #region MobileVersion */
+@media screen and (max-width: 650px) {
+    .favorites-container{
+        margin-top: 30px;
+        min-width: 300px;
+    }
+}

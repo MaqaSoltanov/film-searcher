@@ -3,10 +3,15 @@ import './MainPage.css';
 import Header from '../../components/Header/Header';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import Movies from '../../components/Movies/Movies';
-import Favorites from '../../components/Favorites/Favorites';
+// import { connect } from 'react-redux';
+import MobileFavorites from '../../components/Favorites/MobileFavorites';
+import PCFavorites from '../../components/Favorites/PCFavorites';
 
-class MainPage extends Component {
+
+
+class MainPage extends Component {    
     render() { 
+        
         return (
             <div className="main-page">
                 <Header />
@@ -14,18 +19,28 @@ class MainPage extends Component {
                     <section className="main-page__main-section">
                         <div className="main-page__search-box">
                             <SearchBox />
+                            <MobileFavorites />
                         </div>
                         <div className="main-page__movies">
                             <Movies />
                         </div>
                     </section>
                     <aside className="main-page__favorites">
-                        <Favorites />
+                        <PCFavorites />
                     </aside>
                 </main>
             </div>
         );
     }
 }
- 
+// const mapStateToProps = (state) =>
+// {  
+  
+// }
+
+// const mapDispatchToProps = (dispatch) => ({  
+    
+// });
+
+// export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
 export default MainPage;

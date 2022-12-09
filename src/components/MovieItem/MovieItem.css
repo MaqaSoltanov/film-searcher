@@ -29,3 +29,22 @@
     opacity: 0.9;
     transition: all 0.2s linear;
 }
+
+@media screen and (max-width: 650px) {
+    .movie-item__add-button {        
+        border: none;
+        background-color: #496DDB;
+        padding: 10px 15px;
+        color: #FFEEDB;
+        font-size: 10px;
+        transition: all 0.2s linear;
+    }
+
+    .movie-item{
+        min-width: 270px;
+    }
+
+    .movie-item__title{
+        font-size: 15px;
+    }
+}

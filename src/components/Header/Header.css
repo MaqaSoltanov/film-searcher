@@ -1,6 +1,7 @@
 .header {
     background: #496DDB;
     padding: 20px calc(50% - 500px) 10px;
+    min-width: 425px;
 }
 
 .header__title {
@@ -8,4 +9,10 @@
     color: #FFEEDB;
     font-size: 45px;
     margin-left: 40px;
+}
+
+@media screen and (max-width: 650px) {
+    .header__title{
+        margin-left: 28%;
+    }
 }

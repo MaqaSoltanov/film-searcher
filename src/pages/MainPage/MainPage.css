@@ -1,7 +1,7 @@
 .main-page__content {
     padding: 42px calc(50% - 500px);
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between;;
 }
 
 .main-page__main-section {
