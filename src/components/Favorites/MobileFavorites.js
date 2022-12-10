@@ -2,12 +2,11 @@ import Favorites from "./Favorites";
 import useMediaQuery from 'use-media-query-hook';
 import React from "react";
 
-export default function MobileFavorites()
-{
+export default function MobileFavorites() {
     const isMobile = useMediaQuery('(max-width: 650px)');
-    return(
+    return (
         <div className="favorites-container">
-            {isMobile ? <Favorites/> : ""}
+            {isMobile ? <Favorites /> : ""}
         </div>
     )
 }

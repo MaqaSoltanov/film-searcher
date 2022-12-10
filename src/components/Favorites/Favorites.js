@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './Favorites.css';
 
 
 class Favorites extends Component {
-    state = {
-        title: 'Новый список',
-        movies: [
-            { imdbID: 'tt0068646', title: 'The Godfather', year: 1972 }
-        ]
-    }
-    
-    render() { 
+
+    render() {
         return (
             <div className="favorites">
                 <input className="favorites__name" />
                 <ul className="favorites__list">
-                    {this.state.movies.map((item) => {
+                    {this.props.favMovies.map((item) => {
                         return <li key={item.imdbID}>{item.title} ({item.year})</li>;
                     })}
                 </ul>
@@ -24,5 +19,10 @@ class Favorites extends Component {
         );
     }
 }
- 
-export default Favorites;
+
+const mapStateToProps = (state) => {
+    console.log("mapStateToProps updated Favorites");
+    return { favMovies: state.favoriteReducer.favoriteMovies }
+}
+
+export default connect(mapStateToProps)(Favorites);
