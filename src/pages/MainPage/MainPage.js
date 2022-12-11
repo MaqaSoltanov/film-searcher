@@ -3,7 +3,6 @@ import './MainPage.css';
 import Header from '../../components/Header/Header';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import Movies from '../../components/Movies/Movies';
-// import { connect } from 'react-redux';
 import MobileFavorites from '../../components/Favorites/MobileFavorites';
 import PCFavorites from '../../components/Favorites/PCFavorites';
 
@@ -33,14 +32,5 @@ class MainPage extends Component {
         );
     }
 }
-// const mapStateToProps = (state) =>
-// {  
-  
-// }
 
-// const mapDispatchToProps = (dispatch) => ({  
-    
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
 export default MainPage;

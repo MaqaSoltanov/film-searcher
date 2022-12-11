@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import updateMoviesAction from '../../redux/actions/updateMoviesAction';
 import './SearchBox.css';
 
 class SearchBox extends Component {
@@ -8,9 +10,7 @@ class SearchBox extends Component {
     searchLineChangeHandler = (e) => {
         this.setState({ searchLine: e.target.value });
     }
-    searchBoxSubmitHandler = (e) => {
-        e.preventDefault();
-    }
+
     render() {
         const { searchLine } = this.state;
 
@@ -31,6 +31,8 @@ class SearchBox extends Component {
                         type="submit"
                         className="search-box__form-submit"
                         disabled={!searchLine}
+                        onClick={(e) => this.props.getMovies(e, searchLine)}
+
                     >
                         Искать
                     </button>
@@ -39,5 +41,25 @@ class SearchBox extends Component {
         );
     }
 }
- 
-export default SearchBox;
+
+const mapDispatchToProps = (dispatch) => ({
+    getMovies: async (e, searchLine) => {
+        console.log("Dispatched UPDATE_MOVIES action")
+        e.preventDefault();
+        var moviesList;
+
+        await fetch(`http://www.omdbapi.com/?s=${searchLine}&apikey=3b9fab44`)
+        .then(res => { return res.json() })
+        .then((data) => {moviesList = structuredClone(data)})
+        .catch(error => {throw(error)});
+                
+        if(moviesList.Response === "False"){
+            alert(moviesList.Error);
+            return;
+        }
+        
+        dispatch(updateMoviesAction(moviesList.Search));
+    }
+})
+
+export default connect(null, mapDispatchToProps)(SearchBox);

@@ -5,6 +5,6 @@ const initialState = {
 
 export default function favoriteReducer(state = initialState, action)
 {
-    console.log("FavoriteReducer returned state");
+    console.log("FavoriteReducer returned state");    
     return {...state};
 }

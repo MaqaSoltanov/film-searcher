@@ -12,7 +12,7 @@ class Movies extends Component {
                     <li className="movies__item" key={movie.imdbID}>
                         <MovieItem {...movie} />
                     </li>
-                ))}
+                )) }
             </ul>
         );
     }
