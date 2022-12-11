@@ -12,7 +12,8 @@ export default function movieReducer(state = initialState, action) {
             movies
         }        
     }
-    console.log("movieReducer returned state")
+    
+    console.log("movieReducer returned default state")
     return { ...state };
 }
 
