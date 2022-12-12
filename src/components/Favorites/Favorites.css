@@ -7,7 +7,7 @@
 .favorites__name {
     box-sizing: border-box;
     width: 100%;
-    font-size: 16px;
+    font-size: 18px;
     padding: 5px 10px;
     border: 1px solid rgba(0, 8, 7, .5);
     margin-bottom: 24px;
@@ -15,7 +15,14 @@
 
 .favorites__list {
     margin-bottom: 24px;
+    font-size: 18px;
 }
+
+li:not(:last-child){
+    margin-bottom: 10px;
+}
+
+
 
 .favorites__save {
     border: none;
@@ -38,4 +45,21 @@
         margin-top: 30px;
         min-width: 300px;
     }
+}
+
+.delete-button{
+    margin-left: 15px;
+    background-color: #496DDB;
+    border: none;
+    height: 30px;
+    width: 30px;
+    border-radius: 30px;
+    padding: 0px;
+    box-sizing: border-box;
+    color: white;
+}
+
+.delete-button:hover{
+    background-color: #497CBB;
+    cursor: pointer;
 }

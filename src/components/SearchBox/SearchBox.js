@@ -31,7 +31,7 @@ class SearchBox extends Component {
                         type="submit"
                         className="search-box__form-submit"
                         disabled={!searchLine}
-                        onClick={(e) => this.props.getMovies(e, searchLine)}
+                        onClick={(e) => this.props.getMovies(e, searchLine, this.props.favMovies)}
 
                     >
                         Искать
@@ -42,24 +42,50 @@ class SearchBox extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        favMovies: state.favoriteReducer.favoriteMovies
+    }
+}
+
 const mapDispatchToProps = (dispatch) => ({
-    getMovies: async (e, searchLine) => {
+    getMovies: async (e, searchLine, favMovies) => {
         console.log("Dispatched UPDATE_MOVIES action")
         e.preventDefault();
-        var moviesList;
 
+        var apiResponse;
+        // Fetch to get movies by the name of searchLine
         await fetch(`http://www.omdbapi.com/?s=${searchLine}&apikey=3b9fab44`)
-        .then(res => { return res.json() })
-        .then((data) => {moviesList = structuredClone(data)})
-        .catch(error => {throw(error)});
-                
-        if(moviesList.Response === "False"){
-            alert(moviesList.Error);
+            .then(res => { return res.json() })
+            .then((data) => { apiResponse = structuredClone(data) })
+            .catch(error => { throw (error) });
+
+        // Checking response on errors
+        if (apiResponse.Response === "False") {
+            alert(apiResponse.Error);
             return;
         }
-        
-        dispatch(updateMoviesAction(moviesList.Search));
+
+        // Adding new property which says whether if movie is added to favorites or not
+        const moviesArr = apiResponse.Search.map((movie) => {
+            return {
+                ...movie,
+                isAdded: false
+            }
+        });
+
+        // Checking if favMovies contains any movie and if it does we change the isAdded property
+        if (favMovies.length > 0) {
+            for (let i = 0; i < favMovies.length; i++) {
+                for (let j = 0; j < moviesArr.length; j++) {
+                    if (moviesArr[j].imdbID === favMovies[i].imdbID)
+                        moviesArr[j].isAdded = true;
+                }
+            }
+        }
+
+        dispatch(updateMoviesAction(moviesArr));
     }
 })
 
-export default connect(null, mapDispatchToProps)(SearchBox);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBox);
