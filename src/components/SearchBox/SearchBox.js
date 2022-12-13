@@ -32,7 +32,6 @@ class SearchBox extends Component {
                         className="search-box__form-submit"
                         disabled={!searchLine}
                         onClick={(e) => this.props.getMovies(e, searchLine, this.props.favMovies)}
-
                     >
                         Искать
                     </button>

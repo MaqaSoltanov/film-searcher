@@ -2,7 +2,6 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import MainPage from './pages/MainPage/MainPage';
 import ListPage from './pages/ListPage/ListPage';
-import { Provider } from 'react-redux';
 
 import './reset.css';
 import './common.css';

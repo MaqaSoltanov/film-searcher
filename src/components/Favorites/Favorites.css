@@ -22,8 +22,6 @@ li:not(:last-child){
     margin-bottom: 10px;
 }
 
-
-
 .favorites__save {
     border: none;
     background-color: #496DDB;
@@ -31,6 +29,7 @@ li:not(:last-child){
     color: #FFEEDB;
     font-size: 14px;
     transition: all 0.2s linear;
+    margin-right: 100px;
 }
 
 .favorites__save:hover {
