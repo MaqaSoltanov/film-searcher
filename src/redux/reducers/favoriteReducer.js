@@ -26,7 +26,7 @@ export default function favoriteReducer(state = initialState, action) {
             if (item.imdbID === action.payload.id)
                 indexOfElementToDelete = index;
         })
-
+        
         favoriteMovies.splice(indexOfElementToDelete, 1);
 
         return {
@@ -43,20 +43,6 @@ export default function favoriteReducer(state = initialState, action) {
             ...state,
             title
         }
-    }
-
-    if (action.type === "MAKE_POST_REQUEST") {
-        console.log("favoriteReducer worked for MAKE_POST_REQUEST");
-        const getID = action.payload.id;
-        return {
-            ...state,
-            getID
-        }
-    }
-
-    if (action.type === "MAKE_GET_REQUEST") {
-        console.log("favoriteReducer worked for MAKE_GET_REQUEST");
-        
     }
 
     console.log("favoriteReducer returned default state");

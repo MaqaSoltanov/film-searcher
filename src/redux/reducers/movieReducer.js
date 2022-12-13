@@ -9,7 +9,7 @@ export default function movieReducer(state = initialState, action) {
         return {
             ...state,
             movies
-        } 
+        }
     }
 
     if (action.type === "CHANGE_BUTTON_CONTENT") {
@@ -25,17 +25,13 @@ export default function movieReducer(state = initialState, action) {
                 }
             }
 
-            return{
-                ...movie
-            }
+            return { ...movie }
         })
 
-
-        return{
+        return {
             ...state,
             movies
         }
-
     }
 
     console.log("movieReducer returned default state")

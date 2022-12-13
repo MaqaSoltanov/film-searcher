@@ -5,7 +5,6 @@ import changeButtonContentAction from '../../redux/actions/changeButtonContent.A
 import updateTitleAction from '../../redux/actions/updateTitleAction';
 import './Favorites.css';
 import { Link } from 'react-router-dom';
-import makePostRequestAction from '../../redux/actions/makePostRequestAction';
 
 class Favorites extends Component {
     state = {
@@ -14,18 +13,14 @@ class Favorites extends Component {
     }
 
     handleChange = (e, favMovies) => {
-        if (e.target.value.length !== 0 && favMovies.length !== 0)
-            this.setState({ isActive: true });
-
+        if (e.target.value.length !== 0 && favMovies.length !== 0) this.setState({ isActive: true });
         else this.setState({ isActive: false });
-
         this.props.updateTitle(e.target.value);
     }
 
-    handleSaveClick = (e, favMovies, listTitle) => {
+    handleSaveClick = (e) => {
         e.preventDefault();
         this.setState({ isPressed: true });
-        this.props.makePostRequest(favMovies, listTitle);
     }
 
     render() {
@@ -45,7 +40,6 @@ class Favorites extends Component {
                         )
                     })}
                 </ul>
-
                 {
                     this.state.isPressed
                         ?
@@ -53,10 +47,10 @@ class Favorites extends Component {
                         :
                         <button type="submit"
                             className="favorites__save"
-
-                            disabled={!(this.state.isActive)} onClick={(e) => this.handleSaveClick(e, this.props.favMovies, this.props.listTitle)}>
+                            disabled={!(this.state.isActive)} onClick={(e) => this.handleSaveClick(e)}>
                             Сохранить список
-                        </button>}
+                        </button>
+                }
             </div>
         );
     }
@@ -82,33 +76,6 @@ const mapDispatchToProps = (dispatch) => ({
         console.log("Dispatched UPDATE_TITLE action");
         dispatch(updateTitleAction(newTitle));
     },
-
-    makePostRequest: async (favMovies, listTitle) => {
-        console.log("Dispatched MAKE_POST_REQUEST action");
-        var idArray = favMovies.map((favMovie) => {
-            return favMovie.imdbID;
-        })
-
-
-        var bodyArgument = { title: listTitle, movies: idArray };
-        console.log(bodyArgument);
-        var id;
-
-        await fetch("https://acb-api.algoritmika.org/api/movies/list", {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json"
-            },
-
-            body: JSON.stringify(bodyArgument)
-
-        }).then(res => res.json()).then((data) => {
-            id = data.id;
-            console.log(data);
-        });
-        console.log(id);
-        dispatch(makePostRequestAction(id));
-    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

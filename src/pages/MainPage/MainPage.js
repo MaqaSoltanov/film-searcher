@@ -10,7 +10,6 @@ import PCFavorites from '../../components/Favorites/PCFavorites';
 
 class MainPage extends Component {    
     render() { 
-        
         return (
             <div className="main-page">
                 <Header />
