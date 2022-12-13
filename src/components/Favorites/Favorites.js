@@ -17,6 +17,8 @@ class Favorites extends Component {
         if (e.target.value.length !== 0 && favMovies.length !== 0)
             this.setState({ isActive: true });
 
+        else this.setState({ isActive: false });
+
         this.props.updateTitle(e.target.value);
     }
 
@@ -47,7 +49,7 @@ class Favorites extends Component {
                 {
                     this.state.isPressed
                         ?
-                        <Link to="/list/:id">{this.props.listTitle}</Link>
+                        <Link to="/list/:id">Перейти к списку</Link>
                         :
                         <button type="submit"
                             className="favorites__save"
