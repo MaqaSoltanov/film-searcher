@@ -13,8 +13,11 @@ class Favorites extends Component {
     }
 
     handleChange = (e, favMovies) => {
-        if (e.target.value.length !== 0 && favMovies.length !== 0) this.setState({ isActive: true });
+        if (e.target.value.length !== 0 && favMovies.length !== 0)
+            this.setState({ isActive: true });
+
         else this.setState({ isActive: false });
+
         this.props.updateTitle(e.target.value);
     }
 
@@ -26,7 +29,10 @@ class Favorites extends Component {
     render() {
         return (
             <div className="favorites">
-                <input className="favorites__name" onChange={(e) => this.handleChange(e, this.props.favMovies)} readOnly={this.state.isPressed} />
+                <input className="favorites__name" value={this.props.listTitle}  
+                onChange={(e) => this.handleChange(e, this.props.favMovies)} 
+                readOnly={this.state.isPressed} 
+                disabled={!this.props.favMovies.length}/>
                 <ul className="favorites__list">
                     {this.props.favMovies.map((item) => {
                         return (
@@ -40,6 +46,7 @@ class Favorites extends Component {
                         )
                     })}
                 </ul>
+
                 {
                     this.state.isPressed
                         ?
@@ -49,8 +56,7 @@ class Favorites extends Component {
                             className="favorites__save"
                             disabled={!(this.state.isActive)} onClick={(e) => this.handleSaveClick(e)}>
                             Сохранить список
-                        </button>
-                }
+                        </button>}
             </div>
         );
     }
