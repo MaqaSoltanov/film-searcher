@@ -22,7 +22,8 @@ class Favorites extends Component {
         this.props.updateTitle(e.target.value);
     }
 
-    handleSaveClick = (favMovies, listTitle) => {
+    handleSaveClick = (e,favMovies, listTitle) => {
+        e.preventDefault();
         this.setState({ isPressed: true });
         this.props.makePostRequest(favMovies, listTitle);
     }
@@ -49,9 +50,10 @@ class Favorites extends Component {
                         ?
                         <Link to="/list/:id">{this.props.listTitle}</Link>
                         :
-                        <button type="button"
-                            className="favorites__save"
-                            disabled={!(this.state.isActive)} onClick={() => this.handleSaveClick(this.props.favMovies, this.props.listTitle)}>
+                        <button type="submit"
+                            className="favorites__save" 
+                            
+                            disabled={!(this.state.isActive)} onClick={(e) => this.handleSaveClick(e,this.props.favMovies, this.props.listTitle)}>
                             Сохранить список
                         </button>}
             </div>

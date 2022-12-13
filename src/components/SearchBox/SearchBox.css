@@ -19,6 +19,7 @@
 }
 
 .search-box__form-submit {
+    z-index: -1;
     margin-top: 17px;
     padding: 5px 10px;
     border: none;
