@@ -1,7 +1,12 @@
+body{
+    margin: 0px;
+}
+
 .favorites {
     box-sizing: border-box;
     border: 1px solid rgba(0, 8, 7);
-    padding: 30px 20px;
+    padding: 30px 15px;
+    margin-right: 20px;
 }
 
 .favorites__name {
@@ -18,8 +23,22 @@
     font-size: 18px;
 }
 
-li:not(:last-child){
+.favorite-list-li:not(:last-child){
     margin-bottom: 10px;
+}
+
+.favorite-list-li{
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+}
+
+.favorite-list-li p{
+    box-sizing: border-box;
+    vertical-align: middle;
+    height: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .favorites__save {
@@ -46,17 +65,17 @@ li:not(:last-child){
 @media screen and (max-width: 650px) {
     .favorites-container{
         margin-top: 30px;
-        min-width: 300px;
+        min-width: 335px;
     }
 }
 
 .delete-button{
-    margin-left: 15px;
+    margin-right: 5px;
     background-color: #496DDB;
     border: none;
-    height: 30px;
-    width: 30px;
-    border-radius: 30px;
+    height: 20px;
+    width: 20px;
+    min-width: 20px;
     padding: 0px;
     box-sizing: border-box;
     color: white;

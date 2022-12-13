@@ -19,7 +19,7 @@
 }
 
 .search-box__form-submit {
-    z-index: -1;
+    
     margin-top: 17px;
     padding: 5px 10px;
     border: none;
@@ -39,4 +39,11 @@
 .search-box__form-submit:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+
+@media screen and (max-width: 650px) {
+    .search-box__form-submit{
+        z-index: 1;
+    }
 }

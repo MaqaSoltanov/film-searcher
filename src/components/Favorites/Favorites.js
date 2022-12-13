@@ -14,15 +14,13 @@ class Favorites extends Component {
     }
 
     handleChange = (e, favMovies) => {
-        if (e.target.value.length !== 0)
+        if (e.target.value.length !== 0 && favMovies.length !== 0)
             this.setState({ isActive: true });
-
-        else if(favMovies.length !== 0) this.setState({ isActive: false });
 
         this.props.updateTitle(e.target.value);
     }
 
-    handleSaveClick = (e,favMovies, listTitle) => {
+    handleSaveClick = (e, favMovies, listTitle) => {
         e.preventDefault();
         this.setState({ isPressed: true });
         this.props.makePostRequest(favMovies, listTitle);
@@ -31,15 +29,16 @@ class Favorites extends Component {
     render() {
         return (
             <div className="favorites">
-                <input className="favorites__name" onChange={(e) => this.handleChange(e, this.props.favMovies)} readOnly={this.state.isPressed}/>
+                <input className="favorites__name" onChange={(e) => this.handleChange(e, this.props.favMovies)} readOnly={this.state.isPressed} />
                 <ul className="favorites__list">
                     {this.props.favMovies.map((item) => {
                         return (
-                            <li key={item.imdbID}>{item.Title} ({item.Year})
+                            <li className="favorite-list-li" key={item.imdbID}>
                                 <button className='delete-button'
                                     onClick={() => this.props.deleteMovie(item.imdbID)}>
                                     x
                                 </button>
+                                <p>{item.Title} ({item.Year})</p>
                             </li>
                         )
                     })}
@@ -51,9 +50,9 @@ class Favorites extends Component {
                         <Link to="/list/:id">{this.props.listTitle}</Link>
                         :
                         <button type="submit"
-                            className="favorites__save" 
-                            
-                            disabled={!(this.state.isActive)} onClick={(e) => this.handleSaveClick(e,this.props.favMovies, this.props.listTitle)}>
+                            className="favorites__save"
+
+                            disabled={!(this.state.isActive)} onClick={(e) => this.handleSaveClick(e, this.props.favMovies, this.props.listTitle)}>
                             Сохранить список
                         </button>}
             </div>
@@ -88,7 +87,7 @@ const mapDispatchToProps = (dispatch) => ({
             return favMovie.imdbID;
         })
 
-        
+
         var bodyArgument = { title: listTitle, movies: idArray };
         console.log(bodyArgument);
         var id;

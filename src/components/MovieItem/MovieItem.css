@@ -2,6 +2,7 @@
     padding: 20px;
     background-color: #FFEEDB;
     display: flex;
+    min-width: 335px;
 }
 
 .movie-item__poster {
@@ -41,7 +42,7 @@
     }
 
     .movie-item{
-        min-width: 270px;
+        min-width: 335px;
     }
 
     .movie-item__title{
