@@ -54,6 +54,11 @@ export default function favoriteReducer(state = initialState, action) {
         }
     }
 
+    if (action.type === "MAKE_GET_REQUEST") {
+        console.log("favoriteReducer worked for MAKE_GET_REQUEST");
+        
+    }
+
     console.log("favoriteReducer returned default state");
     return { ...state };
 }

@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import makeGetRequestAction from '../../redux/actions/makeGetRequestAction';
 import './ListPage.css';
 
 class ListPage extends Component {
-    state = {
-        movies: [
-            { title: 'The Godfather', year: 1972, imdbID: 'tt0068646' }
-        ]
+    dispatchFromRender = (id) => {
+        this.props.makeGetRequest(id);
     }
-    componentDidMount() {
-        const id = this.props.match.params;
-        console.log(id);
-        // TODO: запрос к сервер на получение списка
-        // TODO: запросы к серверу по всем imdbID
-    }
-    render() { 
-        const {Title, Year, imdbID} = this.props;
+    render() {
+        const { Title, Year, imdbID } = this.props;
+        this.dispatchFromRender(this.props.getID)
         return (
             <div className="list-page">
-                <h1 className="list-page__title">Мой список</h1>
+                <h1 className="list-page__title">{this.props.listTitle}</h1>
                 <ul>
-                    {this.state.movies.map((item) => {
+                    {this.props.moviesFromApi.map((item) => {
                         return (
                             <li key={item.imdbID}>
-                                <a href={`https://www.imdb.com/title/${imdbID}/`} target="_blank">{item.title} ({item.year})</a>
+                                <a href={`https://www.imdb.com/title/${item.imdbID}/`} target="_blank">{item.Title} ({item.Year})</a>
                             </li>
                         );
                     })}
@@ -31,5 +26,26 @@ class ListPage extends Component {
         );
     }
 }
- 
-export default ListPage;
+
+const mapDispatchToProps = (dispatch) => ({
+    makeGetRequest: async(id) => {
+        console.log("Dispatched DELETE_FROM_FAVORITES action");
+        var idArray;
+        await fetch(`https://acb-api.algoritmika.org/api/movies/list/${id}`)
+        .then(res => res.json())
+        .then(data => idArray = data.movies)
+        dispatch(makeGetRequestAction(idArray));
+    },
+})
+
+const mapStateToProps = (state) => {
+    console.log("mapStateToProps updated ListPage");
+
+    return {
+        moviesFromApi: state.favoriteReducer.favoriteMovies,
+        getID: state.favoriteReducer.getID,
+        listTitle: state.favoriteReducer.title
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListPage);
